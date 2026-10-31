@@ -1,7 +1,7 @@
 {
   "name": "google-account-switcher",
   "version": "1.0.0",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "type": "module",
   "description": "Firefox extension that automatically switches to your preferred Google account on the Google apps and custom domains you choose.",
   "homepage": "https://github.com/segfawlt/google-account-switcher",
@@ -13,8 +13,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "lint": "web-ext lint --source-dir . --ignore-files '.github' '.github/**' 'node_modules' 'node_modules/**' 'tests' 'tests/**' 'scripts' 'scripts/**' 'docs' 'docs/**' 'package*.json' 'tsconfig.json' 'LICENSE' 'SECURITY.md' '.taste-skill' '.taste-skill/**' 'web-ext-artifacts' 'web-ext-artifacts/**'",
-    "package": "web-ext build --source-dir . --artifacts-dir web-ext-artifacts --overwrite-dest --ignore-files '.github' '.github/**' 'node_modules' 'node_modules/**' 'tests' 'tests/**' 'scripts' 'scripts/**' 'docs' 'docs/**' 'package*.json' 'tsconfig.json' 'LICENSE' 'SECURITY.md' '.taste-skill' '.taste-skill/**' 'README.md' && cp web-ext-artifacts/account_switcher-1.0.0.zip web-ext-artifacts/account_switcher-1.0.0.xpi"
+    "lint": "web-ext lint --source-dir . --ignore-files '.github' '.github/**' 'node_modules' 'node_modules/**' 'tests' 'tests/**' 'scripts' 'scripts/**' 'docs' 'docs/**' 'package*.json' 'tsconfig.json' 'SECURITY.md' '.taste-skill' '.taste-skill/**' 'web-ext-artifacts' 'web-ext-artifacts/**'",
+    "package": "web-ext build --source-dir . --artifacts-dir web-ext-artifacts --overwrite-dest --ignore-files '.github' '.github/**' 'node_modules' 'node_modules/**' 'tests' 'tests/**' 'scripts' 'scripts/**' 'docs' 'docs/**' 'package*.json' 'tsconfig.json' 'SECURITY.md' '.taste-skill' '.taste-skill/**' 'README.md' && cp web-ext-artifacts/account_switcher-1.0.0.zip web-ext-artifacts/account_switcher-1.0.0.xpi"
   },
   "devDependencies": {
     "@fontsource-variable/google-sans": "^5.3.2",

@@ -90,4 +90,5 @@ npm run package   # Output web-ext-artifacts/account_switcher-1.0.0.zip & .xpi
 
 ## License
 
-[MIT](LICENSE) — bundled `Google Sans` font subsets in `src/assets/fonts/` are licensed under the SIL Open Font License 1.1 (`OFL-1.1`).
+- **Extension source code:** Licensed under the [GNU General Public License v3.0 or later (`GPL-3.0-or-later`)](LICENSE).
+- **Bundled Font Software (`src/assets/fonts/google-sans-*.woff2`):** Aggregated as standalone font assets and licensed under the [SIL Open Font License 1.1 (`OFL-1.1`)](src/assets/fonts/OFL.txt) (`Copyright 2017 Google, Inc.`).
