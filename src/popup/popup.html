@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Account Switcher</title>
+    <link rel="stylesheet" href="../ui/styles.css" />
+  </head>
+  <body class="popup-body">
+    <header class="popup-header">
+      <h1 class="popup-title">Account Switcher</h1>
+      <label class="global-toggle-label">
+        <span>Redirect</span>
+        <span class="switch">
+          <input id="global-redirect-toggle" type="checkbox" checked aria-label="Enable redirects globally" />
+          <span class="switch-track"></span>
+        </span>
+      </label>
+    </header>
+
+    <div id="popup-notice" class="notice" role="status" hidden>
+      <span id="popup-notice-text"></span>
+      <button id="popup-notice-dismiss" type="button" class="btn-ghost" aria-label="Dismiss message">
+        Close
+      </button>
+    </div>
+
+    <section id="current-tab-card" class="card tab-strip" aria-labelledby="current-tab-heading">
+      <div class="section-head">
+        <h2 id="current-tab-heading" class="section-title">Current tab</h2>
+        <span id="current-tab-badge" class="pill">Checking</span>
+      </div>
+      <div id="current-tab-body"></div>
+    </section>
+
+    <section class="card section-block" aria-labelledby="default-account-heading">
+      <div class="section-head">
+        <h2 id="default-account-heading" class="section-title">Default account</h2>
+        <span id="default-account-slot" class="section-meta num"></span>
+      </div>
+      <select id="default-account-select" class="select" aria-label="Default Google account"></select>
+    </section>
+
+    <section class="card section-block" aria-labelledby="allowed-apps-heading">
+      <div class="section-head">
+        <h2 id="allowed-apps-heading" class="section-title">Included apps</h2>
+        <span id="allowed-apps-count" class="section-meta num">0 on</span>
+      </div>
+
+      <div class="toolbar-row">
+        <input
+          id="service-search-input"
+          type="search"
+          class="input"
+          placeholder="Search apps or domains..."
+          aria-label="Filter included apps"
+        />
+      </div>
+
+      <div class="Popup-scroll-services">
+        <div id="service-list" class="service-list"></div>
+      </div>
+
+      <form id="add-service-form" class="add-form" novalidate>
+        <input
+          id="add-service-input"
+          type="text"
+          class="input"
+          placeholder="e.g. antigravity.google.com"
+          aria-label="Add custom Google service domain"
+        />
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+    </section>
+
+    <section class="card section-block" aria-labelledby="accounts-heading">
+      <div class="section-head">
+        <h2 id="accounts-heading" class="section-title">Accounts</h2>
+        <span id="accounts-count" class="section-meta num">0 saved</span>
+      </div>
+
+      <div class="toolbar-row">
+        <button id="import-google-btn" type="button" class="btn" style="flex: 1">
+          Sync from Google
+        </button>
+        <button id="toggle-manual-account-btn" type="button" class="btn">
+          Add manually
+        </button>
+      </div>
+
+      <form id="manual-account-form" class="add-form" hidden novalidate>
+        <input
+          id="manual-email-input"
+          type="email"
+          class="input"
+          placeholder="you@gmail.com"
+          aria-label="Google account email"
+        />
+        <input
+          id="manual-slot-input"
+          type="number"
+          min="0"
+          max="20"
+          class="input num"
+          style="width: 72px; flex: none"
+          placeholder="u/0"
+          aria-label="Optional session slot number"
+        />
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+
+      <div id="account-list-container"></div>
+    </section>
+
+    <footer class="popup-footer">
+      <div class="theme-segment" role="group" aria-label="Color theme">
+        <button type="button" class="theme-btn" data-theme-choice="system" aria-pressed="true">
+          Auto
+        </button>
+        <button type="button" class="theme-btn" data-theme-choice="light" aria-pressed="false">
+          Light
+        </button>
+        <button type="button" class="theme-btn" data-theme-choice="dark" aria-pressed="false">
+          Dark
+        </button>
+      </div>
+
+      <div id="reset-controls" style="display: flex; align-items: center; gap: 10px">
+        <button id="open-options-btn" type="button" class="footer-link">
+          Settings
+        </button>
+        <button id="reset-btn" type="button" class="btn-text-danger">
+          Reset
+        </button>
+        <button id="reset-confirm-btn" type="button" class="btn btn-danger-outline" style="height: 26px; font-size: 12px" hidden>
+          Confirm
+        </button>
+        <button id="reset-cancel-btn" type="button" class="btn-ghost" style="height: 26px; font-size: 12px" hidden>
+          Cancel
+        </button>
+      </div>
+    </footer>
+
+    <script type="module" src="./popup.js"></script>
+  </body>
+</html>

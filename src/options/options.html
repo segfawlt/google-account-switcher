@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Account Switcher — Settings</title>
+    <link rel="stylesheet" href="../ui/styles.css" />
+  </head>
+  <body class="options-body">
+    <div class="mobile-topbar">
+      <span class="mobile-topbar-title">Account Switcher</span>
+      <button id="mobile-menu-btn" type="button" class="btn" style="height: 30px; font-size: 12px">
+        Menu
+      </button>
+    </div>
+
+    <div class="app-shell">
+      <aside id="app-sidebar" class="app-sidebar" aria-label="Settings sections">
+        <div class="sidebar-top">
+          <div class="sidebar-brand">
+            <div class="sidebar-brand-text">
+              <span class="sidebar-brand-name">Account Switcher</span>
+              <span id="sidebar-scope-text" class="sidebar-brand-scope num">0 active rules</span>
+            </div>
+          </div>
+
+          <nav class="sidebar-nav">
+            <a href="#allowlist" class="nav-item" data-view="allowlist" aria-current="page">
+              <span>Included apps</span>
+              <span id="nav-allowlist-count" class="num" style="font-size: 12px">0</span>
+            </a>
+            <a href="#accounts" class="nav-item" data-view="accounts">
+              <span>Google accounts</span>
+              <span id="nav-accounts-count" class="num" style="font-size: 12px">0</span>
+            </a>
+            <a href="#backup" class="nav-item" data-view="backup">
+              <span>Backup &amp; reset</span>
+            </a>
+          </nav>
+        </div>
+
+        <div class="sidebar-foot">
+          <div>
+            <span class="field-label">Appearance</span>
+            <div class="theme-segment theme-segment-full" role="group" aria-label="Appearance">
+              <button type="button" class="theme-btn" data-theme-choice="system" aria-pressed="true">
+                Auto
+              </button>
+              <button type="button" class="theme-btn" data-theme-choice="light" aria-pressed="false">
+                Light
+              </button>
+              <button type="button" class="theme-btn" data-theme-choice="dark" aria-pressed="false">
+                Dark
+              </button>
+            </div>
+          </div>
+
+          <div class="sidebar-status-box">
+            <span style="font-size: 13px; font-weight: 500">Global redirect</span>
+            <label class="switch">
+              <input
+                id="opt-global-toggle"
+                type="checkbox"
+                checked
+                aria-label="Enable redirects globally"
+              />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+        </div>
+      </aside>
+
+      <main class="app-canvas">
+        <div id="opt-notice" class="notice" role="status" style="margin-bottom: 20px" hidden>
+          <span id="opt-notice-text"></span>
+          <button id="opt-notice-dismiss" type="button" class="btn-ghost">Close</button>
+        </div>
+
+        <!-- VIEW 1: INCLUDED APPS -->
+        <div id="view-allowlist" data-view-panel="allowlist">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Included apps</h1>
+              <p id="allowlist-finding-line" class="page-subtitle">
+                Only apps turned on below switch to your chosen Google account. Everything else stays untouched.
+              </p>
+            </div>
+          </div>
+
+          <section class="settings-band" aria-labelledby="band-default-title">
+            <div class="band-aside">
+              <h2 id="band-default-title" class="band-heading">Default target account</h2>
+              <p class="band-desc">
+                Included apps set to Default switch to this Google account automatically.
+              </p>
+            </div>
+            <div class="band-panel">
+              <div>
+                <label class="field-label" for="opt-default-account-select">Default Google account</label>
+                <select id="opt-default-account-select" class="select"></select>
+              </div>
+            </div>
+          </section>
+
+          <section class="settings-band" aria-labelledby="band-add-title">
+            <div class="band-aside">
+              <h2 id="band-add-title" class="band-heading">Add custom Google service</h2>
+              <p class="band-desc">
+                Add any Google subdomain (such as <code>antigravity.google.com</code>) or a sub-path override (such as <code>docs.google.com/forms</code>).
+              </p>
+            </div>
+            <div class="band-panel">
+              <form id="opt-add-service-form" class="add-form" style="margin-top: 0" novalidate>
+                <input
+                  id="opt-add-service-input"
+                  type="text"
+                  class="input"
+                  placeholder="antigravity.google.com or docs.google.com/forms"
+                  aria-label="Domain or path to add"
+                />
+                <button type="submit" class="btn btn-primary">Add service</button>
+              </form>
+              <div>
+                <span class="field-label">Sub-app overrides for docs.google.com</span>
+                <div id="subapp-presets" class="preset-chips"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="settings-band" aria-labelledby="band-services-title">
+            <div class="band-aside">
+              <h2 id="band-services-title" class="band-heading">Included services</h2>
+              <p class="band-desc">
+                Choose which apps switch accounts automatically and assign per-service accounts where needed.
+              </p>
+              <dl class="band-summary-dl">
+                <div class="summary-kv">
+                  <dt>Active apps</dt>
+                  <dd id="summary-enabled-count" class="num">0</dd>
+                </div>
+                <div class="summary-kv">
+                  <dt>Custom domains</dt>
+                  <dd id="summary-custom-count" class="num">0</dd>
+                </div>
+                <div class="summary-kv">
+                  <dt>Per-app overrides</dt>
+                  <dd id="summary-override-count" class="num">0</dd>
+                </div>
+              </dl>
+            </div>
+            <div class="band-panel">
+              <div class="toolbar-row">
+                <input
+                  id="opt-service-search"
+                  type="search"
+                  class="input"
+                  placeholder="Search services or domains..."
+                  aria-label="Search services"
+                />
+              </div>
+              <div id="opt-service-list" class="service-list"></div>
+            </div>
+          </section>
+        </div>
+
+        <!-- VIEW 2: GOOGLE ACCOUNTS -->
+        <div id="view-accounts" data-view-panel="accounts" hidden>
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Google accounts</h1>
+              <p class="page-subtitle">
+                Import active Google sessions from Firefox so rules map to exact <code>u/0</code>–<code>u/N</code> session indices.
+              </p>
+            </div>
+            <button id="opt-import-btn" type="button" class="btn btn-primary">
+              Sync from Google
+            </button>
+          </div>
+
+          <section class="settings-band" aria-labelledby="band-accounts-list-title">
+            <div class="band-aside">
+              <h2 id="band-accounts-list-title" class="band-heading">Session accounts</h2>
+              <p class="band-desc">
+                Removing an account here hides it from dropdowns without shifting the <code>u/N</code> slot numbers of your other signed-in accounts.
+              </p>
+            </div>
+            <div class="band-panel">
+              <div id="opt-accounts-list"></div>
+            </div>
+          </section>
+
+          <section class="settings-band" aria-labelledby="band-manual-acc-title">
+            <div class="band-aside">
+              <h2 id="band-manual-acc-title" class="band-heading">Add account manually</h2>
+              <p class="band-desc">
+                Optional fallback if you want to pre-configure an email or update its numeric <code>u/</code> slot manually.
+              </p>
+            </div>
+            <div class="band-panel">
+              <form id="opt-manual-account-form" class="manual-account-grid" novalidate>
+                <div>
+                  <label class="field-label" for="opt-manual-email">Account email</label>
+                  <input
+                    id="opt-manual-email"
+                    type="email"
+                    class="input"
+                    placeholder="name@gmail.com"
+                  />
+                </div>
+                <div>
+                  <label class="field-label" for="opt-manual-slot">Slot (u/N)</label>
+                  <input
+                    id="opt-manual-slot"
+                    type="number"
+                    min="0"
+                    max="20"
+                    class="input num"
+                    placeholder="0"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Save account</button>
+              </form>
+            </div>
+          </section>
+        </div>
+
+        <!-- VIEW 3: BACKUP & RESET -->
+        <div id="view-backup" data-view-panel="backup" hidden>
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Backup &amp; reset</h1>
+              <p class="page-subtitle">
+                Export your allowlist rules as JSON or restore defaults.
+              </p>
+            </div>
+          </div>
+
+          <section class="settings-band" aria-labelledby="band-export-title">
+            <div class="band-aside">
+              <h2 id="band-export-title" class="band-heading">Configuration backup</h2>
+              <p class="band-desc">
+                Save a local JSON copy of your accounts, default target, and custom allowlist rules.
+              </p>
+            </div>
+            <div class="band-panel">
+              <div class="toolbar-row">
+                <button id="export-json-btn" type="button" class="btn">Export JSON</button>
+                <label class="btn" style="cursor: pointer">
+                  <span>Import JSON</span>
+                  <input id="import-json-input" type="file" accept="application/json" hidden />
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <section class="settings-band" aria-labelledby="band-reset-title">
+            <div class="band-aside">
+              <h2 id="band-reset-title" class="band-heading">Reset all settings</h2>
+              <p class="band-desc">
+                Clears saved accounts, disables all allowlist toggles, and removes custom service domains.
+              </p>
+            </div>
+            <div class="band-panel">
+              <div class="toolbar-row">
+                <button id="opt-reset-btn" type="button" class="btn btn-danger-outline">
+                  Reset all settings
+                </button>
+                <button id="opt-reset-confirm-btn" type="button" class="btn btn-danger-outline" hidden>
+                  Confirm full reset
+                </button>
+                <button id="opt-reset-cancel-btn" type="button" class="btn" hidden>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="./options.js"></script>
+  </body>
+</html>

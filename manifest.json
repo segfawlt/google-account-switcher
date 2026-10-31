@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Account Switcher",
+  "version": "1.0.0",
+  "description": "Automatically switch to your preferred Google account on the Google apps and custom domains you choose.",
+  "homepage_url": "https://github.com/segfawlt/google-account-switcher",
+  "action": {
+    "default_title": "Account Switcher",
+    "default_popup": "src/popup/popup.html"
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": ["src/background.js"],
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "host_permissions": [
+    "https://*.google.com/*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "account-switcher@segfawlt.github.io",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "128.0"
+    }
+  }
+}
