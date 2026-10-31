@@ -21,7 +21,7 @@
     "@types/firefox-webext-browser": "^120.0.4",
     "playwright": "^1.51.0",
     "typescript": "^5.8.2",
-    "vitest": "^3.0.8",
+    "vitest": "^4.1.11",
     "web-ext": "^8.6.0"
   }
 }
