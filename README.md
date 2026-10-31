@@ -5,6 +5,12 @@ A clean, lightweight Firefox Manifest V3 extension that automatically switches t
 When you're signed into multiple Google accounts in Firefox (`u/0`, `u/1`, `u/2`, …), Google defaults every shared link, bookmark, and new tab back to `u/0`. **Account Switcher** intercepts navigations before the page loads and routes your included apps straight to the right account — while leaving unlisted apps completely untouched.
 
 ---
+## Note
+This extension does not collect your credentials or make any internet connections. If you have security concerns, feel free to inspect the code using any AI agent to verify its safety.
+
+I use this extension daily, so I will continue to maintain it. If you notice long gaps between commits, it simply means the extension is working perfectly.
+
+Feel free to fork this project. Contributions are very welcome! and I will review PRs and issues ASAP.
 
 ## Screenshots
 
