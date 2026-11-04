@@ -19,13 +19,11 @@ Feel free to fork this project. Contributions are very welcome! and I will revie
   &nbsp;
   <img src="docs/screenshots/popup-routed-docs.png" alt="Active routing on Google Docs in Light Mode" width="31%" />
   &nbsp;
-  <img src="docs/screenshots/popup-dark-mode.png" alt="Popup in Dark Mode" width="31%" />
 </p>
 
 <p align="center">
   <img src="docs/screenshots/options-allowlist-desktop.png" alt="Full settings page in Light Mode" width="49%" />
   &nbsp;
-  <img src="docs/screenshots/options-dark-desktop.png" alt="Full settings page in Dark Mode" width="49%" />
 </p>
 
 ---
