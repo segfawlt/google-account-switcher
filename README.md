@@ -19,11 +19,6 @@ Feel free to fork this project. Contributions are very welcome! and I will revie
   &nbsp;
 </p>
 
-<p align="center">
-  <img src="docs/screenshots/options-allowlist-desktop.png" alt="Full settings page in Light Mode" width="49%" />
-  &nbsp;
-</p>
-
 ---
 
 ## Features
