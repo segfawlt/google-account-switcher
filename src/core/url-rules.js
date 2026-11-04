@@ -59,6 +59,22 @@ export function normalizePathPrefix(rawPath) {
 }
 
 /**
+ * Check whether a hostname belongs to a supported Google or YouTube domain
+ * (`google.com`, `*.google.com`, `youtube.com`, or `*.youtube.com`).
+ * @param {string} rawHost
+ * @returns {boolean}
+ */
+export function isSupportedGoogleHost(rawHost) {
+  const bare = normalizeHost(rawHost.startsWith("*.") ? rawHost.slice(2) : rawHost);
+  return (
+    bare === "google.com" ||
+    bare.endsWith(".google.com") ||
+    bare === "youtube.com" ||
+    bare.endsWith(".youtube.com")
+  );
+}
+
+/**
  * Parse and validate user service input or tab URL into a normalized ServiceRule descriptor.
  * @param {string} rawInput
  * @param {{ keepPath?: boolean; customLabel?: string }} [options]
@@ -99,6 +115,13 @@ export function normalizeServiceInput(rawInput, options = {}) {
     return { ok: false, error: "Enter a valid domain name (for example, antigravity.google.com)." };
   }
 
+  if (!isSupportedGoogleHost(baseHost)) {
+    return {
+      ok: false,
+      error: "Only Google domains (*.google.com and *.youtube.com) are supported.",
+    };
+  }
+
   if (EXCLUDED_HOSTS.has(baseHost) || EXCLUDED_HOST_SUFFIXES.some((s) => baseHost.endsWith(s))) {
     return {
       ok: false,
@@ -112,7 +135,10 @@ export function normalizeServiceInput(rawInput, options = {}) {
 
   const preset = SUB_APP_PRESETS.find((p) => p.id === id);
   const label = options.customLabel?.trim() || preset?.label || id;
-  const originPattern = wildcardPrefix ? `https://*.${baseHost}/*` : `https://${baseHost}/*`;
+  const originPattern =
+    wildcardPrefix || baseHost === "youtube.com"
+      ? `https://*.${baseHost}/*`
+      : `https://${baseHost}/*`;
 
   return {
     ok: true,
@@ -125,13 +151,12 @@ export function normalizeServiceInput(rawInput, options = {}) {
 }
 
 /**
- * Check whether a host is already covered by the built-in `https://*.google.com/*` permission.
+ * Check whether a host is already covered by the built-in `*.google.com` or `*.youtube.com` permissions.
  * @param {string} host
  * @returns {boolean}
  */
 export function isCoveredByBuiltinPermissions(host) {
-  const bare = host.startsWith("*.") ? host.slice(2) : host;
-  return bare === "google.com" || bare.endsWith(".google.com");
+  return isSupportedGoogleHost(host);
 }
 
 /**

@@ -365,7 +365,7 @@ async function enforceRuleOnExistingTab(tabId, state) {
 
 browser.webRequest.onBeforeRequest.addListener(
   handleBeforeRequest,
-  { urls: ["https://*.google.com/*"], types: ["main_frame"] },
+  { urls: ["https://*.google.com/*", "https://*.youtube.com/*"], types: ["main_frame"] },
   ["blocking"]
 );
 

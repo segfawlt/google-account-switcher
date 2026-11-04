@@ -8,7 +8,7 @@ import {
   createInitialState,
 } from "./constants.js";
 import { mergeImportedAccounts, removeAccountPreservingIndices } from "./google-accounts.js";
-import { normalizeServiceInput } from "./url-rules.js";
+import { isSupportedGoogleHost, normalizeServiceInput } from "./url-rules.js";
 
 /**
  * @typedef {import("./constants.js").AccountEntry} AccountEntry
@@ -99,6 +99,7 @@ export function sanitizeState(raw) {
       if (!item || typeof item !== "object") continue;
       const rec = /** @type {Record<string, unknown>} */ (item);
       if (typeof rec.id !== "string" || typeof rec.host !== "string") continue;
+      if (!isSupportedGoogleHost(rec.host)) continue;
 
       const existingStarter = byId.get(rec.id);
       const rawAccount =

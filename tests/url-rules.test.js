@@ -5,6 +5,7 @@ import {
   evaluateNavigationRequest,
   extractUrlAccount,
   isExcludedUrl,
+  isSupportedGoogleHost,
   matchServiceRule,
   normalizeServiceInput,
 } from "../src/core/url-rules.js";
@@ -72,6 +73,48 @@ describe("normalizeServiceInput", () => {
   it("rejects auth endpoints like accounts.google.com", () => {
     const res = normalizeServiceInput("accounts.google.com");
     expect(res.ok).toBe(false);
+    expect(normalizeServiceInput("accounts.youtube.com").ok).toBe(false);
+  });
+
+  it("allows *.google.com and *.youtube.com while rejecting non-Google domains", () => {
+    expect(isSupportedGoogleHost("docs.google.com")).toBe(true);
+    expect(isSupportedGoogleHost("antigravity.google.com")).toBe(true);
+    expect(isSupportedGoogleHost("youtube.com")).toBe(true);
+    expect(isSupportedGoogleHost("www.youtube.com")).toBe(true);
+    expect(isSupportedGoogleHost("studio.youtube.com")).toBe(true);
+    expect(isSupportedGoogleHost("github.com")).toBe(false);
+    expect(isSupportedGoogleHost("notgoogle.com")).toBe(false);
+
+    const yt = normalizeServiceInput("https://www.youtube.com/watch?v=dQw4w9WgXcQ", {
+      keepPath: false,
+    });
+    expect(yt).toEqual({
+      ok: true,
+      id: "youtube.com",
+      host: "youtube.com",
+      pathPrefix: "",
+      label: "youtube.com",
+      originPattern: "https://*.youtube.com/*",
+    });
+
+    const ytStudio = normalizeServiceInput("https://studio.youtube.com/channel/UC123", {
+      keepPath: false,
+    });
+    expect(ytStudio).toMatchObject({
+      ok: true,
+      id: "studio.youtube.com",
+      host: "studio.youtube.com",
+      pathPrefix: "",
+      originPattern: "https://studio.youtube.com/*",
+    });
+
+    const nonGoogle = normalizeServiceInput("https://github.com/segfawlt/google-account-switcher", {
+      keepPath: false,
+    });
+    expect(nonGoogle).toEqual({
+      ok: false,
+      error: "Only Google domains (*.google.com and *.youtube.com) are supported.",
+    });
   });
 });
 

@@ -23,10 +23,8 @@
     "webRequestBlocking"
   ],
   "host_permissions": [
-    "https://*.google.com/*"
-  ],
-  "optional_host_permissions": [
-    "https://*/*"
+    "https://*.google.com/*",
+    "https://*.youtube.com/*"
   ],
   "browser_specific_settings": {
     "gecko": {

@@ -68,6 +68,7 @@ export const STARTER_SERVICES = [
   { id: "console.cloud.google.com", label: "Cloud Console", host: "console.cloud.google.com", pathPrefix: "" },
   { id: "photos.google.com", label: "Google Photos", host: "photos.google.com", pathPrefix: "" },
   { id: "keep.google.com", label: "Google Keep", host: "keep.google.com", pathPrefix: "" },
+  { id: "youtube.com", label: "YouTube", host: "youtube.com", pathPrefix: "" },
 ];
 
 /** @type {ReadonlyArray<{ id: string; label: string; host: string; pathPrefix: string }>} */
@@ -109,6 +110,7 @@ export const EXCLUDED_PATH_PREFIXES = [
   "/o/oauth2",
   "/v3/signin",
   "/signin",
+  "/signin_prompt",
   "/signoutoptions",
 ];
 

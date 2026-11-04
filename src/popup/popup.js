@@ -8,6 +8,7 @@ import {
 } from "../core/storage.js";
 import {
   isExcludedUrl,
+  isSupportedGoogleHost,
   matchServiceRule,
   normalizeHost,
   normalizeServiceInput,
@@ -167,6 +168,21 @@ function renderCurrentTabStrip(visibleAccounts, defaultAcc) {
         h("span", { className: "tab-host-name" }, [hostDisplay]),
         h("span", { className: "tab-status-text" }, [
           "Google sign-in and OAuth pages are left untouched so login never breaks.",
+        ]),
+      ])
+    );
+    return;
+  }
+
+  if (!isSupportedGoogleHost(hostDisplay)) {
+    currentTabBadge.className = "pill";
+    currentTabBadge.textContent = "Non-Google site";
+    replaceChildrenSafe(
+      currentTabBody,
+      h("div", { className: "tab-host-group" }, [
+        h("span", { className: "tab-host-name" }, [hostDisplay]),
+        h("span", { className: "tab-status-text" }, [
+          "Only Google apps (*.google.com and YouTube) can be switched.",
         ]),
       ])
     );
