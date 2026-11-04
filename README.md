@@ -4,11 +4,10 @@ A clean, lightweight Firefox Manifest V3 extension that automatically switches t
 
 When you're signed into multiple Google accounts in Firefox (`u/0`, `u/1`, `u/2`, …), Google defaults every shared link, bookmark, and new tab back to `u/0`. **Account Switcher** intercepts navigations before the page loads and routes your included apps straight to the right account — while leaving unlisted apps completely untouched.
 <p align="center">
-  <a href="https://addons.mozilla.org/en-US/firefox/addon/default-account-per-google-app/">
-    <img src="https://addons.mozilla.org/static/img/legacy-badges/en/AMO-button_1.png" alt="Get it on Firefox" width="200" />
+  <a href="https://addons.mozilla.org/firefox/addon/default-account-per-google-app/">
+    <img src="https://extensionworkshop.com/assets/img/badges/get-the-addon-fx-apr-2019.svg" alt="Get the Firefox Add-on" width="200" />
   </a>
 </p>
-
 ---
 ## Note
 This extension does not collect your credentials or make any internet connections. If you have security concerns, feel free to inspect the code using any AI agent to verify its safety.
@@ -67,6 +66,16 @@ Account Switcher runs **100% locally** inside Firefox (`data_collection_permissi
 ---
 
 ## Installation
+
+### From the Firefox Add-ons Store (Recommended)
+
+Install directly from the official Firefox Add-ons marketplace — no build step required:
+
+1. Click the **Get the Firefox Add-on** badge above, or visit:
+   <https://addons.mozilla.org/firefox/addon/default-account-per-google-app/>
+2. Click **Add to Firefox** and confirm the installation.
+
+> **Note:** The marketplace listing is signed and auto-updates. If you want the latest unreleased features, use the [From Source](#from-source-temporary-load-for-testing) or [Build](#build-distributable-package) sections below.
 
 ### From Source (Temporary Load for Testing)
 1. Clone this repository:
