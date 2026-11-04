@@ -15,8 +15,6 @@ Feel free to fork this project. Contributions are very welcome! and I will revie
 ## Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/popup-capture-antigravity.png" alt="Add this tab capture in Light Mode" width="31%" />
-  &nbsp;
   <img src="docs/screenshots/popup-routed-docs.png" alt="Active routing on Google Docs in Light Mode" width="31%" />
   &nbsp;
 </p>
